@@ -1,0 +1,45 @@
+function Graph(container, width, height)
+{
+  this.xArray = [];
+  this.yArray = [];
+  this.colorArray = [];
+  this.container = container;
+  this.container.innerHTML = '<canvas height="' + height + '" width="' + width + '"></canvas>';
+  this.canvas = this.container.childNodes[0];
+}//end graph default constructor
+
+Graph.prototype.addData = function(xData, yData, color)
+{
+  if(xData.length == yData.length)
+  {
+    this.xArray[this.xArray.length] = xData;
+    this.yArray[this.yArray.length] = yData;
+    this.colorArray[this.colorArray.length] = color;
+  }//end if
+  else
+  {
+    console.log("WARNING: Cannot add data. xData.length != yData.length");
+  }//end else
+};//end addData
+
+Graph.prototype.plot = function()
+{
+  var ctx = this.canvas.getContext('2d');
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  for(var i = 0; i < this.xArray.length; i++)
+  {
+    var xData = this.xArray[i];
+    var yData = this.yArray[i];
+    ctx.beginPath();
+    ctx.strokeStyle = this.colorArray[i];
+    ctx.moveTo(xData[0], this.canvas.height - yData[0]);
+    for(var j = 1; j < xData.length; j++)
+    {
+      ctx.lineTo(xData[j], this.canvas.height - yData[j]);
+      ctx.stroke();
+    }//end for
+  }//end for
+};//end plot
