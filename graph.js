@@ -171,5 +171,12 @@ Graph.prototype.setYAxis = function(flag)
 
 Graph.prototype.setTickMarks = function(inc)
 {
-  this.plotTickMarks = inc;
+  if(typeof inc !== 'undefined')
+  {
+    this.plotTickMarks = inc;
+  }//end if
+  else
+  {
+    this.plotTickMarks = -1;
+  }//end else
 };//end setTickMarks

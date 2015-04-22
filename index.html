@@ -24,14 +24,29 @@
     var ySinTest = [];
     var xCosTest = [];
     var yCosTest = [];
-    
-    for(var i = -2 * Math.PI; i <= 2 * Math.PI; i += 0.01)
-    {
-      xSinTest[xSinTest.length] = i;
-      ySinTest[ySinTest.length] = Math.sin(i);
 
-      xCosTest[xCosTest.length] = i;
-      yCosTest[yCosTest.length] = Math.cos(i);
+    var trigMin = -2 * Math.PI;
+    var trigMax = 2 * Math.PI;
+    var trigStep = 0.1;
+  
+    for(var i = 0; i <= (trigMax - trigMin) / trigStep; i++)
+    {
+      var x = i * trigStep + trigMin;
+      xSinTest[xSinTest.length] = x;
+      ySinTest[ySinTest.length] = Math.sin(x);
+
+      xCosTest[xCosTest.length] = x;
+      yCosTest[yCosTest.length] = Math.cos(x);
+    }//end for
+
+    var xCircleTest = [];
+    var yCircleTest = [];
+    var radius = 3;
+
+    for(var i = 0; i <= 360; i++)
+    {
+      xCircleTest[xCircleTest.length] = radius * Math.cos(i * (Math.PI / 180));
+      yCircleTest[yCircleTest.length] = radius * Math.sin(i * (Math.PI / 180));
     }//end for
 
     //graph.addData(xTest1, yTest1, "#000000");
@@ -40,6 +55,7 @@
     //graph.addData(xTest4, yTest4, "#9900FF");
     graph.addData(xSinTest, ySinTest, "#0099FF");
     graph.addData(xCosTest, yCosTest, "#FF0000");
+    graph.addData(xCircleTest, yCircleTest, "#FF7700");
     graph.plot();
   };//end onload
     </script>
